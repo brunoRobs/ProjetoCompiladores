@@ -1,0 +1,32 @@
+{
+    "info": {
+        "title": "Cadastro pessoal"
+    },
+    "items": [
+        {
+            "title": "Insira seu nome",
+            "isRequired": "true"
+        },
+        {
+            "title": "Insira seu sobrenome",
+            "isRequired": "false"
+        },
+        {
+            "title": "Insira seu email",
+            "isRequired": "true"
+        },
+        {
+            "title": "Escolha uma opcao",
+            "isRequired": "false",
+            "choices": [
+                "Option 1",
+                "Option 2",
+                "Option 3"
+            ]
+        },
+        {
+            "title": "This is a title",
+            "helpText": "No questions here"
+        }
+    ]
+}
