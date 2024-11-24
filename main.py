@@ -11,6 +11,8 @@ def executeStmt(stmt):
         executeTitle(stmt.titleStmt())
     elif stmt.insertItemTextStmt():
         executeInsertText(stmt.insertItemTextStmt())
+    elif stmt.insertItemParagraphTextStmt():
+        executeInsertParagraphText(stmt.insertItemParagraphTextStmt())
     elif stmt.insertItemMultipleChoicetStmt():
         executeInsertMultipleChoice(stmt.insertItemMultipleChoicetStmt())
     elif stmt.insertItemSectionHeadertStmt():
@@ -39,11 +41,43 @@ def executeInsertText(stmt):
 
     if 'info' in NEW_FORM:
         if 'items' in NEW_FORM.keys():
-            NEW_FORM['items'].append({itemKeys[0].replace("'", ""): values[0].replace("'", ""), itemKeys[1].replace("'", ""): values[1].replace("'", "")})
+            NEW_FORM['items'].append({"type": "TEXT",
+                                      itemKeys[0].replace("'", ""): values[0].replace("'", ""),
+                                      itemKeys[1].replace("'", ""): values[1].replace("'", ""),
+                                      "index": len(NEW_FORM['items'])
+                                      })
             print(f"Item criado: {values[0].replace("'", "")}")
         else:
             NEW_FORM['items'] = []
-            NEW_FORM['items'].append({itemKeys[0].replace("'", ""): values[0].replace("'", ""), itemKeys[1].replace("'", ""): values[1].replace("'", "")})
+            NEW_FORM['items'].append({"type": "TEXT",
+                                      itemKeys[0].replace("'", ""): values[0].replace("'", ""),
+                                      itemKeys[1].replace("'", ""): values[1].replace("'", ""),
+                                      "index": len(NEW_FORM['items'])
+                                      })
+            print(f"Item criado: {values[0].replace("'", "")}")
+    else:
+        raise Exception(f"Formulario nao iniciado, e necessario um titulo")
+
+# OK
+def executeInsertParagraphText(stmt):
+    itemKeys = [col.getText() for col in stmt.itemKeys().ID()]
+    values = [val.getText() for val in stmt.values().value()]
+
+    if 'info' in NEW_FORM:
+        if 'items' in NEW_FORM.keys():
+            NEW_FORM['items'].append({"type": "PARAGRAPH_TEXT",
+                                      itemKeys[0].replace("'", ""): values[0].replace("'", ""),
+                                      itemKeys[1].replace("'", ""): values[1].replace("'", ""),
+                                      "index": len(NEW_FORM['items'])
+                                      })
+            print(f"Item criado: {values[0].replace("'", "")}")
+        else:
+            NEW_FORM['items'] = []
+            NEW_FORM['items'].append({"type": "PARAGRAPH_TEXT",
+                                      itemKeys[0].replace("'", ""): values[0].replace("'", ""),
+                                      itemKeys[1].replace("'", ""): values[1].replace("'", ""),
+                                      "index": len(NEW_FORM['items'])
+                                      })
             print(f"Item criado: {values[0].replace("'", "")}")
     else:
         raise Exception(f"Formulario nao iniciado, e necessario um titulo")
@@ -60,16 +94,26 @@ def executeInsertMultipleChoice(stmt):
                 if i != 0 and i != 1:
                     choices.append(values[i].replace("'", ""))
 
-            NEW_FORM['items'].append({itemKeys[0].replace("'", ""): values[0].replace("'", ""), itemKeys[1].replace("'", ""): values[1].replace("'", ""), itemKeys[2].replace("'", ""): choices})
+            NEW_FORM['items'].append({"type": "MULTIPLE_CHOICE",
+                                      itemKeys[0].replace("'", ""): values[0].replace("'", ""),
+                                      itemKeys[1].replace("'", ""): values[1].replace("'", ""),
+                                      itemKeys[2].replace("'", ""): choices,
+                                      "index": len(NEW_FORM['items'])
+                                      })
             print(f"Item criado: {values[0].replace("'", "")}")
         else:
             NEW_FORM['items'] = []
+
             choices = []
             for i in range(0, len(values)):
                 if i != 0 and i != 1:
                     choices.append(values[i].replace("'", ""))
 
-            NEW_FORM['items'].append({itemKeys[0].replace("'", ""): values[0].replace("'", ""), itemKeys[1].replace("'", ""): values[1].replace("'", ""), itemKeys[2].replace("'", ""): choices})
+            NEW_FORM['items'].append({"type": "MULTIPLE_CHOICE",
+                                      itemKeys[0].replace("'", ""): values[0].replace("'", ""),
+                                      itemKeys[1].replace("'", ""): values[1].replace("'", ""),
+                                      itemKeys[2].replace("'", ""): choices, "index": len(NEW_FORM['items'])
+                                      })
             print(f"Item criado: {values[0].replace("'", "")}")
     else:
         raise Exception(f"Formulario nao iniciado, e necessario um titulo")
@@ -81,11 +125,17 @@ def executeInsertSectionHeader(stmt):
 
     if 'info' in NEW_FORM:
         if 'items' in NEW_FORM.keys():
-            NEW_FORM['items'].append({itemKeys[0].replace("'", ""): values[0].replace("'", ""), itemKeys[1].replace("'", ""): values[1].replace("'", "")})
+            NEW_FORM['items'].append({"type": "SECTION_HEADER",
+                                      itemKeys[0].replace("'", ""): values[0].replace("'", ""),
+                                      itemKeys[1].replace("'", ""): values[1].replace("'", ""),
+                                      "index": len(NEW_FORM['items'])})
             print(f"Item criado: {values[0].replace("'", "")}")
         else:
             NEW_FORM['items'] = []
-            NEW_FORM['items'].append({itemKeys[0].replace("'", ""): values[0].replace("'", ""), itemKeys[1].replace("'", ""): values[1].replace("'", "")})
+            NEW_FORM['items'].append({"type": "SECTION_HEADER",
+                                      itemKeys[0].replace("'", ""): values[0].replace("'", ""),
+                                      itemKeys[1].replace("'", ""): values[1].replace("'", ""),
+                                      "index": len(NEW_FORM['items'])})
             print(f"Item criado: {values[0].replace("'", "")}")
     else:
         raise Exception(f"Formulario nao iniciado, e necessario um titulo")
@@ -112,6 +162,7 @@ def executeExport(stmt):
 # COMMANDS EXAMPLES:
 # TITLE 'Cadastro pessoal';
 # ITEM TEXT (title, isRequired) VALUES ('Insira seu nome', 'true');
+# ITEM PARAGRAPH_TEXT (title, isRequired) VALUES ('Endereco', 'true');
 # ITEM MULTIPLE_CHOICE (title, isRequired, choices) VALUES ('Escolha uma opcao', 'false', 'Option 1', 'Option 2', 'Option 3');
 # ITEM SECTION_HEADER (title, helpText) VALUES ('This is a title', 'No questions here');
 # SHOW;
@@ -122,8 +173,9 @@ TITLE 'Cadastro pessoal';
 ITEM TEXT (title, isRequired) VALUES ('Insira seu nome', 'true');
 ITEM TEXT (title, isRequired) VALUES ('Insira seu sobrenome', 'false');
 ITEM TEXT (title, isRequired) VALUES ('Insira seu email', 'true');
+ITEM PARAGRAPH_TEXT (title, isRequired) VALUES ('Endereco', 'true');
 ITEM MULTIPLE_CHOICE (title, isRequired, choices) VALUES ('Escolha uma opcao', 'false', 'Option 1', 'Option 2', 'Option 3');
-ITEM SECTION_HEADER (title, helpText) VALUES ('This is a title', 'No questions here');
+ITEM SECTION_HEADER (title, helpText) VALUES ('Titulo do section header', 'Sem perguntas, apenas anotacoes aqui');
 SHOW;
 EXPORT;
 """

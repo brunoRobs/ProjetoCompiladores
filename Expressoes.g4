@@ -4,6 +4,7 @@ grammar Expressoes;
 TITLE: 'TITLE';
 ITEM: 'ITEM';
 TEXT: 'TEXT';
+PARAGRAPH_TEXT: 'PARAGRAPH_TEXT';
 MULTIPLE_CHOICE: 'MULTIPLE_CHOICE';
 SECTION_HEADER: 'SECTION_HEADER';
 SELECT : 'SELECT';
@@ -31,10 +32,11 @@ WS : [ \t\r\n]+ -> skip;
 
 // Parser rules
 prog : stmt+ ;
-stmt : titleStmt | insertItemTextStmt | insertItemMultipleChoicetStmt | insertItemSectionHeadertStmt | showStmt | exportStmt;
+stmt : titleStmt | insertItemTextStmt | insertItemParagraphTextStmt | insertItemMultipleChoicetStmt | insertItemSectionHeadertStmt | showStmt | exportStmt;
 
 titleStmt : TITLE value PV ;
 insertItemTextStmt : ITEM TEXT LPAR itemKeys RPAR VALUES LPAR values RPAR PV ;
+insertItemParagraphTextStmt : ITEM PARAGRAPH_TEXT LPAR itemKeys RPAR VALUES LPAR values RPAR PV ;
 insertItemMultipleChoicetStmt : ITEM MULTIPLE_CHOICE LPAR itemKeys RPAR VALUES LPAR values RPAR PV ;
 insertItemSectionHeadertStmt : ITEM SECTION_HEADER LPAR itemKeys RPAR VALUES LPAR values RPAR PV ;
 showStmt : SHOW PV ;
