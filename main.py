@@ -170,12 +170,16 @@ def executeExport(stmt):
 
 input_text = """
 TITLE 'Cadastro pessoal';
+---DESCRIPTION 'testo descricao';
+---ACCESS PUBLIC/STRICT;
+---USERS ('user1', 'user2', 'user3');
 ITEM TEXT (title, isRequired) VALUES ('Insira seu nome', 'true');
 ITEM TEXT (title, isRequired) VALUES ('Insira seu sobrenome', 'false');
 ITEM TEXT (title, isRequired) VALUES ('Insira seu email', 'true');
 ITEM PARAGRAPH_TEXT (title, isRequired) VALUES ('Endereco', 'true');
 ITEM MULTIPLE_CHOICE (title, isRequired, choices) VALUES ('Escolha uma opcao', 'false', 'Option 1', 'Option 2', 'Option 3');
 ITEM SECTION_HEADER (title, helpText) VALUES ('Titulo do section header', 'Sem perguntas, apenas anotacoes aqui');
+---ITEM SLIDER (title, min, max) VALUES ('Titulo', '1', '5');
 SHOW;
 EXPORT;
 """

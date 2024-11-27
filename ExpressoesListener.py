@@ -44,6 +44,15 @@ class ExpressoesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ExpressoesParser#insertItemParagraphTextStmt.
+    def enterInsertItemParagraphTextStmt(self, ctx:ExpressoesParser.InsertItemParagraphTextStmtContext):
+        pass
+
+    # Exit a parse tree produced by ExpressoesParser#insertItemParagraphTextStmt.
+    def exitInsertItemParagraphTextStmt(self, ctx:ExpressoesParser.InsertItemParagraphTextStmtContext):
+        pass
+
+
     # Enter a parse tree produced by ExpressoesParser#insertItemMultipleChoicetStmt.
     def enterInsertItemMultipleChoicetStmt(self, ctx:ExpressoesParser.InsertItemMultipleChoicetStmtContext):
         pass
@@ -59,42 +68,6 @@ class ExpressoesListener(ParseTreeListener):
 
     # Exit a parse tree produced by ExpressoesParser#insertItemSectionHeadertStmt.
     def exitInsertItemSectionHeadertStmt(self, ctx:ExpressoesParser.InsertItemSectionHeadertStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by ExpressoesParser#updateStmt.
-    def enterUpdateStmt(self, ctx:ExpressoesParser.UpdateStmtContext):
-        pass
-
-    # Exit a parse tree produced by ExpressoesParser#updateStmt.
-    def exitUpdateStmt(self, ctx:ExpressoesParser.UpdateStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by ExpressoesParser#deleteItemStmt.
-    def enterDeleteItemStmt(self, ctx:ExpressoesParser.DeleteItemStmtContext):
-        pass
-
-    # Exit a parse tree produced by ExpressoesParser#deleteItemStmt.
-    def exitDeleteItemStmt(self, ctx:ExpressoesParser.DeleteItemStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by ExpressoesParser#deleteTableStmt.
-    def enterDeleteTableStmt(self, ctx:ExpressoesParser.DeleteTableStmtContext):
-        pass
-
-    # Exit a parse tree produced by ExpressoesParser#deleteTableStmt.
-    def exitDeleteTableStmt(self, ctx:ExpressoesParser.DeleteTableStmtContext):
-        pass
-
-
-    # Enter a parse tree produced by ExpressoesParser#clearStmt.
-    def enterClearStmt(self, ctx:ExpressoesParser.ClearStmtContext):
-        pass
-
-    # Exit a parse tree produced by ExpressoesParser#clearStmt.
-    def exitClearStmt(self, ctx:ExpressoesParser.ClearStmtContext):
         pass
 
 

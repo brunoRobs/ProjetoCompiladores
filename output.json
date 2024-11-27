@@ -4,29 +4,45 @@
     },
     "items": [
         {
+            "type": "TEXT",
             "title": "Insira seu nome",
-            "isRequired": "true"
+            "isRequired": "true",
+            "index": 0
         },
         {
+            "type": "TEXT",
             "title": "Insira seu sobrenome",
-            "isRequired": "false"
+            "isRequired": "false",
+            "index": 1
         },
         {
+            "type": "TEXT",
             "title": "Insira seu email",
-            "isRequired": "true"
+            "isRequired": "true",
+            "index": 2
         },
         {
+            "type": "PARAGRAPH_TEXT",
+            "title": "Endereco",
+            "isRequired": "true",
+            "index": 3
+        },
+        {
+            "type": "MULTIPLE_CHOICE",
             "title": "Escolha uma opcao",
             "isRequired": "false",
             "choices": [
                 "Option 1",
                 "Option 2",
                 "Option 3"
-            ]
+            ],
+            "index": 4
         },
         {
-            "title": "This is a title",
-            "helpText": "No questions here"
+            "type": "SECTION_HEADER",
+            "title": "Titulo do section header",
+            "helpText": "Sem perguntas, apenas anotacoes aqui",
+            "index": 5
         }
     ]
 }
