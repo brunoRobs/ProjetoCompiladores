@@ -1,6 +1,7 @@
 {
     "info": {
-        "title": "Cadastro pessoal"
+        "title": "Cadastro pessoal",
+        "description": "Testo descricao"
     },
     "items": [
         {
@@ -22,27 +23,21 @@
             "index": 2
         },
         {
-            "type": "PARAGRAPH_TEXT",
-            "title": "Endereco",
-            "isRequired": "true",
-            "index": 3
-        },
-        {
             "type": "MULTIPLE_CHOICE",
             "title": "Escolha uma opcao",
-            "isRequired": "false",
-            "choices": [
+            "choices": "false",
+            "isRequired": [
                 "Option 1",
                 "Option 2",
                 "Option 3"
             ],
-            "index": 4
+            "index": 3
         },
         {
             "type": "SECTION_HEADER",
             "title": "Titulo do section header",
-            "helpText": "Sem perguntas, apenas anotacoes aqui",
-            "index": 5
+            "text": "Sem perguntas, apenas anotacoes aqui",
+            "index": 4
         }
     ]
 }

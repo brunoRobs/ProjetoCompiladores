@@ -35,6 +35,15 @@ class ExpressoesListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by ExpressoesParser#descriptionStmt.
+    def enterDescriptionStmt(self, ctx:ExpressoesParser.DescriptionStmtContext):
+        pass
+
+    # Exit a parse tree produced by ExpressoesParser#descriptionStmt.
+    def exitDescriptionStmt(self, ctx:ExpressoesParser.DescriptionStmtContext):
+        pass
+
+
     # Enter a parse tree produced by ExpressoesParser#insertItemTextStmt.
     def enterInsertItemTextStmt(self, ctx:ExpressoesParser.InsertItemTextStmtContext):
         pass
@@ -107,48 +116,12 @@ class ExpressoesListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by ExpressoesParser#assignments.
-    def enterAssignments(self, ctx:ExpressoesParser.AssignmentsContext):
-        pass
-
-    # Exit a parse tree produced by ExpressoesParser#assignments.
-    def exitAssignments(self, ctx:ExpressoesParser.AssignmentsContext):
-        pass
-
-
-    # Enter a parse tree produced by ExpressoesParser#assignment.
-    def enterAssignment(self, ctx:ExpressoesParser.AssignmentContext):
-        pass
-
-    # Exit a parse tree produced by ExpressoesParser#assignment.
-    def exitAssignment(self, ctx:ExpressoesParser.AssignmentContext):
-        pass
-
-
-    # Enter a parse tree produced by ExpressoesParser#condition.
-    def enterCondition(self, ctx:ExpressoesParser.ConditionContext):
-        pass
-
-    # Exit a parse tree produced by ExpressoesParser#condition.
-    def exitCondition(self, ctx:ExpressoesParser.ConditionContext):
-        pass
-
-
     # Enter a parse tree produced by ExpressoesParser#value.
     def enterValue(self, ctx:ExpressoesParser.ValueContext):
         pass
 
     # Exit a parse tree produced by ExpressoesParser#value.
     def exitValue(self, ctx:ExpressoesParser.ValueContext):
-        pass
-
-
-    # Enter a parse tree produced by ExpressoesParser#table.
-    def enterTable(self, ctx:ExpressoesParser.TableContext):
-        pass
-
-    # Exit a parse tree produced by ExpressoesParser#table.
-    def exitTable(self, ctx:ExpressoesParser.TableContext):
         pass
 
 

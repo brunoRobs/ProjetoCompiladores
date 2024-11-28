@@ -9,10 +9,10 @@ NEW_FORM = {}
 def executeStmt(stmt):
     if stmt.titleStmt():
         executeTitle(stmt.titleStmt())
+    elif stmt.descriptionStmt(): 
+        executeDescription(stmt.descriptionStmt())
     elif stmt.insertItemTextStmt():
         executeInsertText(stmt.insertItemTextStmt())
-    elif stmt.insertItemParagraphTextStmt():
-        executeInsertParagraphText(stmt.insertItemParagraphTextStmt())
     elif stmt.insertItemMultipleChoicetStmt():
         executeInsertMultipleChoice(stmt.insertItemMultipleChoicetStmt())
     elif stmt.insertItemSectionHeadertStmt():
@@ -34,6 +34,18 @@ def executeTitle(stmt):
     else:
         raise Exception(f"O formulario ja possui um titulo: {title}")
 
+def executeDescription(stmt): 
+    description = stmt.value().getText().replace("'", "")
+    if 'info' not in NEW_FORM.keys():
+        dict_aux = {'description': description}
+        NEW_FORM['info'] = dict_aux
+        print(f"Descricao criada: {description}")
+    elif 'description' not in NEW_FORM['info'].keys():
+        NEW_FORM['info']['description'] = description
+        print(f"Descricao criada: {description}")
+    else: 
+        raise Exception(f"O formulario ja possui uma descricao: {description}")
+
 # OK
 def executeInsertText(stmt):
     itemKeys = [col.getText() for col in stmt.itemKeys().ID()]
@@ -50,30 +62,6 @@ def executeInsertText(stmt):
         else:
             NEW_FORM['items'] = []
             NEW_FORM['items'].append({"type": "TEXT",
-                                      itemKeys[0].replace("'", ""): values[0].replace("'", ""),
-                                      itemKeys[1].replace("'", ""): values[1].replace("'", ""),
-                                      "index": len(NEW_FORM['items'])
-                                      })
-            print(f"Item criado: {values[0].replace("'", "")}")
-    else:
-        raise Exception(f"Formulario nao iniciado, e necessario um titulo")
-
-# OK
-def executeInsertParagraphText(stmt):
-    itemKeys = [col.getText() for col in stmt.itemKeys().ID()]
-    values = [val.getText() for val in stmt.values().value()]
-
-    if 'info' in NEW_FORM:
-        if 'items' in NEW_FORM.keys():
-            NEW_FORM['items'].append({"type": "PARAGRAPH_TEXT",
-                                      itemKeys[0].replace("'", ""): values[0].replace("'", ""),
-                                      itemKeys[1].replace("'", ""): values[1].replace("'", ""),
-                                      "index": len(NEW_FORM['items'])
-                                      })
-            print(f"Item criado: {values[0].replace("'", "")}")
-        else:
-            NEW_FORM['items'] = []
-            NEW_FORM['items'].append({"type": "PARAGRAPH_TEXT",
                                       itemKeys[0].replace("'", ""): values[0].replace("'", ""),
                                       itemKeys[1].replace("'", ""): values[1].replace("'", ""),
                                       "index": len(NEW_FORM['items'])
@@ -170,17 +158,13 @@ def executeExport(stmt):
 
 input_text = """
 TITLE 'Cadastro pessoal';
----DESCRIPTION 'testo descricao';
----ACCESS PUBLIC/STRICT;
----USERS ('user1', 'user2', 'user3');
+DESCRIPTION 'Testo descricao';
 ITEM TEXT (title, isRequired) VALUES ('Insira seu nome', 'true');
 ITEM TEXT (title, isRequired) VALUES ('Insira seu sobrenome', 'false');
 ITEM TEXT (title, isRequired) VALUES ('Insira seu email', 'true');
-ITEM PARAGRAPH_TEXT (title, isRequired) VALUES ('Endereco', 'true');
-ITEM MULTIPLE_CHOICE (title, isRequired, choices) VALUES ('Escolha uma opcao', 'false', 'Option 1', 'Option 2', 'Option 3');
-ITEM SECTION_HEADER (title, helpText) VALUES ('Titulo do section header', 'Sem perguntas, apenas anotacoes aqui');
----ITEM SLIDER (title, min, max) VALUES ('Titulo', '1', '5');
-SHOW;
+ITEM MULTIPLE_CHOICE (title, choices, isRequired) VALUES ('Escolha uma opcao', 'false', 'Option 1', 'Option 2', 'Option 3');
+ITEM SECTION_HEADER (title, text) VALUES ('Titulo do section header', 'Sem perguntas, apenas anotacoes aqui');
+SHOW;   
 EXPORT;
 """
 
