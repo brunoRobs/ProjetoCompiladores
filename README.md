@@ -1,4 +1,4 @@
-# Linguagem de Domínio Específico para Geração de Formulários
+# Geração de Formulários
 
 ## Equipe
 - Bruno Roberto
